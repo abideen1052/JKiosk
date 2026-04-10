@@ -28,7 +28,7 @@ const NameScreen = ({ navigation }: NameScreenProps) => {
 
   const handleNext = () => {
     console.log('Name entered:', name);
-    // navigation.navigate('Success'); // Or wherever it goes next
+    navigation.navigate('Order');
   };
 
   return (

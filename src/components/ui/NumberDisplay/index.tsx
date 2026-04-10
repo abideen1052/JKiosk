@@ -6,12 +6,14 @@ interface NumberDisplayProps {
   number: string;
   isTablet?: boolean;
   containerStyle?: ViewStyle;
+  isPhone?: boolean;
 }
 
 const NumberDisplay: React.FC<NumberDisplayProps> = ({
   number,
   isTablet,
   containerStyle,
+  isPhone = true,
 }) => {
   return (
     <View
@@ -21,12 +23,16 @@ const NumberDisplay: React.FC<NumberDisplayProps> = ({
         containerStyle,
       ]}
     >
-      <Text style={[styles.countryCode, isTablet && styles.tabletCountryCode]}>
-        {strings.countryCode}
-      </Text>
+      {isPhone && (
+        <Text
+          style={[styles.countryCode, isTablet && styles.tabletCountryCode]}
+        >
+          {strings.countryCode}
+        </Text>
+      )}
       <View style={styles.numberWrapper}>
         <Text style={[styles.number, isTablet && styles.tabletNumber]}>
-          {number || '0000 0000'}
+          {number || (isPhone ? '0000 0000' : '0000')}
         </Text>
         <View style={[styles.cursor, isTablet && styles.tabletCursor]} />
       </View>

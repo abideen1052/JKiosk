@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
   numberWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     flex: 1,
   },
   number: {

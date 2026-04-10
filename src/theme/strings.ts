@@ -11,4 +11,7 @@ export const strings = {
   whatIsYourName: "What's your name?",
   nameSubtitle: 'Please enter your full name for the delivery.',
   enterName: 'Enter Name',
+  enterOrderNumber: 'Enter your Order Number',
+  orderSubtitle: 'Please enter the order number provided by the partner.',
+  placeholderOrder: 'Order Number',
 };
