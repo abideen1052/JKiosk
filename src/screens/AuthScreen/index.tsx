@@ -8,10 +8,16 @@ import CustomKeypad from '../../components/ui/CustomKeypad';
 import NumberDisplay from '../../components/ui/NumberDisplay';
 import CommonButton from '../../components/ui/CommonButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/AppNavigator';
+
+interface AuthScreenProps {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Auth'>;
+}
 
 const isTablet = DeviceInfo.isTablet();
 
-const AuthScreen = () => {
+const AuthScreen = ({ navigation }: AuthScreenProps) => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleNumberPress = (num: string) => {
@@ -26,6 +32,7 @@ const AuthScreen = () => {
 
   const handleNextPress = () => {
     console.log('Next pressed for:', phoneNumber);
+    navigation.navigate('CompanySelection');
   };
 
   const formatPhoneNumber = (num: string) => {

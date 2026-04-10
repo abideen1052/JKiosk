@@ -5,16 +5,18 @@ interface CommonButtonProps {
   title: string;
   onPress: () => void;
   style?: ViewStyle;
+  backgroundColor?: string;
 }
 
 const CommonButton: React.FC<CommonButtonProps> = ({
   title,
   onPress,
   style,
+  backgroundColor,
 }) => {
   return (
     <TouchableOpacity
-      style={[styles.button, style]}
+      style={[styles.button, backgroundColor ? { backgroundColor } : null, style]}
       onPress={onPress}
       activeOpacity={0.8}
     >
