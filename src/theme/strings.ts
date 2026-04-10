@@ -7,5 +7,8 @@ export const strings = {
   countryCode: '+974',
   whoAreYouDeliveringFrom: 'Who are you delivering from?',
   selectDeliveryPartner: 'Select your delivery partner to proceed',
-  backHome: 'Back Home',
+  back: 'BACK',
+  whatIsYourName: "What's your name?",
+  nameSubtitle: 'Please enter your full name for the delivery.',
+  enterName: 'Enter Name',
 };

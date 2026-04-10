@@ -41,17 +41,12 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
-  },
-  backIcon: {
-    fontSize: 18,
-    marginRight: 8,
-    color: '#8B340B',
+    borderColor: colors.footerBorder,
   },
   backText: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#8B340B',
+    color: colors.backButtonText,
   },
   assistanceButton: {
     minWidth: 180,

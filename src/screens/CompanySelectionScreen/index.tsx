@@ -99,13 +99,12 @@ const CompanySelectionScreen = ({
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           >
-            <Text style={styles.backIcon}>←</Text>
-            <Text style={styles.backText}>{strings.backHome}</Text>
+            <Text style={styles.backText}>{strings.back}</Text>
           </TouchableOpacity>
 
           <CommonButton
             title={strings.next}
-            onPress={() => console.log('Assistance clicked')}
+            onPress={() => navigation.navigate('Name')}
             backgroundColor={colors.secondary}
             style={styles.assistanceButton}
           />
