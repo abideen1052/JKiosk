@@ -14,4 +14,13 @@ export const strings = {
   enterOrderNumber: 'Enter your Order Number',
   orderSubtitle: 'Please enter the order number provided by the partner.',
   placeholderOrder: 'Order Number',
+  done: 'Done!',
+  orderProcessed: 'Order found and processed successfully.',
+  company: 'COMPANY',
+  customerName: 'CUSTOMER NAME',
+  mobileNumber: 'MOBILE NUMBER',
+  orderNumber: 'ORDER NUMBER',
+  date: 'DATE',
+  newEntry: 'New Entry',
+  autoRedirect: 'Auto-redirecting in',
 };
