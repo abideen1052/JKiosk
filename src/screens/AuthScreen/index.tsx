@@ -32,7 +32,14 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
 
   const handleNextPress = () => {
     console.log('Next pressed for:', phoneNumber);
-    navigation.navigate('CompanySelection');
+    // Simulating user existence check
+    // For now, let's say if any number is entered, we go to Welcome back 
+    // to show off the new screen, otherwise we can still go to CompanySelection
+    if (phoneNumber.length === 8) {
+      navigation.navigate('WelcomeBack');
+    } else {
+      navigation.navigate('CompanySelection');
+    }
   };
 
   const formatPhoneNumber = (num: string) => {

@@ -6,6 +6,7 @@ interface CommonButtonProps {
   onPress: () => void;
   style?: ViewStyle;
   backgroundColor?: string;
+  textColor?: string;
   disabled?: boolean;
 }
 
@@ -14,6 +15,7 @@ const CommonButton: React.FC<CommonButtonProps> = ({
   onPress,
   style,
   backgroundColor,
+  textColor,
   disabled,
 }) => {
   return (
@@ -27,7 +29,9 @@ const CommonButton: React.FC<CommonButtonProps> = ({
       activeOpacity={0.8}
       disabled={disabled}
     >
-      <Text style={styles.text}>{title}</Text>
+      <Text style={[styles.text, textColor ? { color: textColor } : null]}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
