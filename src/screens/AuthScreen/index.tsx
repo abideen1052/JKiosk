@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { styles } from './styles';
 import { strings } from '../../theme/strings';
@@ -94,7 +94,7 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
             <CommonButton
               title={strings.next}
               onPress={handleNextPress}
-              style={styles.nextButton}
+              style={[styles.nextButton, styles.tabletNextButton]}
             />
           </View>
 
@@ -106,6 +106,13 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
               isTablet={true}
             />
           </View>
+
+          <TouchableOpacity
+            style={styles.adminButtonTablet}
+            onPress={() => navigation.navigate('Admin')}
+          >
+            <Text style={styles.adminText}>Admin Access</Text>
+          </TouchableOpacity>
         </View>
       );
     }
@@ -140,6 +147,13 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
           style={styles.nextButton}
           isLoading={loading}
         />
+
+        <TouchableOpacity
+          style={styles.adminButtonMobile}
+          onPress={() => navigation.navigate('Admin')}
+        >
+          <Text style={styles.adminText}>Admin Access</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     );
   };

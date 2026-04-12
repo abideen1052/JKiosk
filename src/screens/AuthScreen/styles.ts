@@ -48,11 +48,30 @@ export const styles = StyleSheet.create({
   nextButton: {
     width: '100%',
     maxWidth: 400,
+    //marginTop: 10,
+  },
+  tabletNextButton: {
     marginTop: 20,
-    marginBottom: 20,
   },
   mobileKeypadContainer: {
-    marginVertical: 10,
-    backgroundColor: 'transparent',
+    marginVertical: 40,
+  },
+  adminButtonMobile: {
+    alignSelf: 'center',
+    padding: 10,
+  },
+  adminButtonTablet: {
+    position: 'absolute',
+    bottom: 30,
+    alignSelf: 'center',
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    padding: 15,
+  },
+  adminText: {
+    color: colors.textMuted,
+    fontSize: 14,
+    textDecorationLine: 'underline',
   },
 });

@@ -76,3 +76,38 @@ export const saveDeliveryLog = async (
     throw err;
   }
 };
+
+export const getAllDeliveryLogs = async filters => {
+  try {
+    let query = supabase
+      .from('delivery_logs')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (filters.company && filters.company !== 'All') {
+      query = query.eq('company', filters.company);
+    }
+
+    if (filters.month) {
+      // filters.month is 'YYYY-MM'
+      const [year, month] = filters.month.split('-');
+      const lastDay = new Date(parseInt(year), parseInt(month), 0).getDate();
+      
+      const startDate = `${filters.month}-01`;
+      const endDate = `${filters.month}-${lastDay}`;
+      
+      query = query.gte('order_date', startDate).lte('order_date', endDate);
+    }
+
+    if (filters.search) {
+      query = query.ilike('order_number', `%${filters.search}%`);
+    }
+
+    const { data, error } = await query;
+    if (error) throw error;
+    return data;
+  } catch (err) {
+    console.error('Error fetching all logs:', err);
+    return [];
+  }
+};

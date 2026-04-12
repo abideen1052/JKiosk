@@ -3,6 +3,7 @@ import {
   TouchableOpacity,
   Text,
   ActivityIndicator,
+  StyleProp,
 } from 'react-native';
 import { styles } from './styles';
 import { colors } from '../../../theme/color';
@@ -10,7 +11,7 @@ import { colors } from '../../../theme/color';
 interface CommonButtonProps {
   title: string;
   onPress: () => void;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
   backgroundColor?: string;
   textColor?: string;
   disabled?: boolean;

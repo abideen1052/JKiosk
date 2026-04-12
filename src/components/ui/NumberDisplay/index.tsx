@@ -32,7 +32,7 @@ const NumberDisplay: React.FC<NumberDisplayProps> = ({
       )}
       <View style={styles.numberWrapper}>
         <Text style={[styles.number, isTablet && styles.tabletNumber]}>
-          {number || (isPhone ? '0000 0000' : '0000')}
+          {number || (isPhone ? '0000 0000' : '00000000')}
         </Text>
         <View style={[styles.cursor, isTablet && styles.tabletCursor]} />
       </View>

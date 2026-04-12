@@ -7,6 +7,7 @@ import NameScreen from '../screens/NameScreen';
 import OrderScreen from '../screens/OrderScreen';
 import SuccessScreen from '../screens/SuccessScreen';
 import WelcomeBackScreen from '../screens/WelcomeBackScreen';
+import AdminScreen from '../screens/AdminScreen';
 
 export type RootStackParamList = {
   Auth: undefined;
@@ -15,6 +16,7 @@ export type RootStackParamList = {
   Order: undefined;
   Success: undefined;
   WelcomeBack: undefined;
+  Admin: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -34,6 +36,7 @@ export default function AppNavigator() {
       <Stack.Screen name="Order" component={OrderScreen} />
       <Stack.Screen name="Success" component={SuccessScreen} />
       <Stack.Screen name="WelcomeBack" component={WelcomeBackScreen} />
+      <Stack.Screen name="Admin" component={AdminScreen} />
     </Stack.Navigator>
   );
 }
