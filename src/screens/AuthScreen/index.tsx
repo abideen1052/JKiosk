@@ -10,6 +10,8 @@ import CommonButton from '../../components/ui/CommonButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/AppNavigator';
+import { getRiderByMobile } from '../../lib/riderService';
+import { useFlowStore } from '../../store/useFlowStore';
 
 interface AuthScreenProps {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Auth'>;
@@ -19,6 +21,7 @@ const isTablet = DeviceInfo.isTablet();
 
 const AuthScreen = ({ navigation }: AuthScreenProps) => {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleNumberPress = (num: string) => {
     if (phoneNumber.length < 8) {
@@ -30,15 +33,38 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
     setPhoneNumber(prev => prev.slice(0, -1));
   };
 
-  const handleNextPress = () => {
-    console.log('Next pressed for:', phoneNumber);
-    // Simulating user existence check
-    // For now, let's say if any number is entered, we go to Welcome back 
-    // to show off the new screen, otherwise we can still go to CompanySelection
-    if (phoneNumber.length === 8) {
-      navigation.navigate('WelcomeBack');
-    } else {
+  const { setMobile, setRiderDetails, resetFlow } = useFlowStore();
+
+  const handleNextPress = async () => {
+    if (phoneNumber.length < 8) return;
+
+    setLoading(true);
+    try {
+      const rider = await getRiderByMobile(phoneNumber);
+      console.log('Rider found:', rider);
+
+      if (rider) {
+        // Returning rider — go to Welcome Back screen
+        setRiderDetails({
+          name: rider.name,
+          company: rider.company,
+          mobile: phoneNumber,
+          isReturning: true,
+        });
+        navigation.navigate('WelcomeBack');
+      } else {
+        // New rider — start clean flow
+        resetFlow();
+        setMobile(phoneNumber);
+        navigation.navigate('CompanySelection');
+      }
+    } catch (err) {
+      console.error('Error fetching rider:', err);
+      // Fallback to normal flow if error
+      setMobile(phoneNumber);
       navigation.navigate('CompanySelection');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -112,6 +138,7 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
           title={strings.next}
           onPress={handleNextPress}
           style={styles.nextButton}
+          isLoading={loading}
         />
       </SafeAreaView>
     );

@@ -10,6 +10,7 @@ interface KeypadButtonProps {
   textStyle?: TextStyle;
   containerStyle?: ViewStyle;
   isTablet?: boolean;
+  disabled?: boolean;
 }
 
 const KeypadButton: React.FC<KeypadButtonProps> = ({
@@ -19,6 +20,7 @@ const KeypadButton: React.FC<KeypadButtonProps> = ({
   containerStyle,
   textStyle,
   isTablet,
+  disabled,
 }) => {
   return (
     <TouchableOpacity
@@ -26,9 +28,11 @@ const KeypadButton: React.FC<KeypadButtonProps> = ({
         styles.button,
         isTablet ? styles.tabletButton : styles.mobileButton,
         containerStyle,
+        disabled && { opacity: 0.5 },
       ]}
       onPress={onPress}
       activeOpacity={0.6}
+      disabled={disabled}
     >
       {icon ? icon : <Text style={[styles.label, textStyle]}>{label}</Text>}
     </TouchableOpacity>

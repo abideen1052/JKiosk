@@ -1,5 +1,11 @@
-import { ViewStyle, TouchableOpacity, Text } from 'react-native';
+import {
+  ViewStyle,
+  TouchableOpacity,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import { styles } from './styles';
+import { colors } from '../../../theme/color';
 
 interface CommonButtonProps {
   title: string;
@@ -8,6 +14,7 @@ interface CommonButtonProps {
   backgroundColor?: string;
   textColor?: string;
   disabled?: boolean;
+  isLoading?: boolean;
 }
 
 const CommonButton: React.FC<CommonButtonProps> = ({
@@ -17,6 +24,7 @@ const CommonButton: React.FC<CommonButtonProps> = ({
   backgroundColor,
   textColor,
   disabled,
+  isLoading,
 }) => {
   return (
     <TouchableOpacity
@@ -29,9 +37,13 @@ const CommonButton: React.FC<CommonButtonProps> = ({
       activeOpacity={0.8}
       disabled={disabled}
     >
-      <Text style={[styles.text, textColor ? { color: textColor } : null]}>
-        {title}
-      </Text>
+      {isLoading ? (
+        <ActivityIndicator color={colors.white} size={'large'} />
+      ) : (
+        <Text style={[styles.text, textColor ? { color: textColor } : null]}>
+          {title}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };

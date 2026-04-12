@@ -8,6 +8,7 @@ interface CustomKeypadProps {
   onCheckPress: () => void;
   containerStyle?: ViewStyle;
   isTablet?: boolean;
+  disabled?: boolean;
 }
 
 const CustomKeypad: React.FC<CustomKeypadProps> = ({
@@ -16,6 +17,7 @@ const CustomKeypad: React.FC<CustomKeypadProps> = ({
   onCheckPress,
   containerStyle,
   isTablet,
+  disabled,
 }) => {
   const keys = [
     '1',
@@ -41,6 +43,7 @@ const CustomKeypad: React.FC<CustomKeypadProps> = ({
           isTablet={isTablet}
           containerStyle={!isTablet ? styles.transparentBg : undefined}
           textStyle={styles.specialKeyText}
+          disabled={disabled}
         />
       );
     }
@@ -52,6 +55,7 @@ const CustomKeypad: React.FC<CustomKeypadProps> = ({
           isTablet={isTablet}
           containerStyle={!isTablet ? styles.transparentBg : undefined}
           textStyle={styles.checkKeyText}
+          disabled={disabled}
         />
       );
     }
@@ -60,6 +64,7 @@ const CustomKeypad: React.FC<CustomKeypadProps> = ({
         label={item}
         onPress={() => onNumberPress(item)}
         isTablet={isTablet}
+        disabled={disabled}
       />
     );
   };

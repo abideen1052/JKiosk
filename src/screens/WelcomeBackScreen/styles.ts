@@ -128,4 +128,21 @@ export const styles = StyleSheet.create({
     marginTop: 'auto',
     marginBottom: 40,
   },
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: colors.footerBorder,
+    marginTop: 20,
+    alignSelf: 'flex-start',
+  },
+  backText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: colors.backButtonText,
+  },
 });

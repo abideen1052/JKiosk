@@ -62,10 +62,34 @@ const COMPANIES: CompanyData[] = [
   },
 ];
 
+import { useFlowStore } from '../../store/useFlowStore';
+
 const CompanySelectionScreen = ({
   navigation,
 }: CompanySelectionScreenProps) => {
-  const [selectedId, setSelectedId] = useState(COMPANIES[0].id);
+  const { company: storedCompany, setCompany } = useFlowStore();
+  
+  // Find the ID that matches the stored company name, default to '1' (Talabat)
+  const getInitialSelectedId = () => {
+    if (storedCompany === 'Talabat') return '1';
+    if (storedCompany === 'Keeta') return '2';
+    if (storedCompany === 'Snoonu') return '3';
+    if (storedCompany === 'Rafeeq') return '4';
+    return COMPANIES[0].id;
+  };
+
+  const [selectedId, setSelectedId] = useState(getInitialSelectedId());
+
+  const handleNext = () => {
+    let companyName = 'Partner';
+    if (selectedId === '1') companyName = 'Talabat';
+    else if (selectedId === '2') companyName = 'Keeta';
+    else if (selectedId === '3') companyName = 'Snoonu';
+    else if (selectedId === '4') companyName = 'Rafeeq';
+    
+    setCompany(companyName);
+    navigation.navigate('Name');
+  };
 
   const renderItem = ({ item }: { item: CompanyData }) => (
     <CompanyCard
@@ -104,7 +128,7 @@ const CompanySelectionScreen = ({
 
           <CommonButton
             title={strings.next}
-            onPress={() => navigation.navigate('Name')}
+            onPress={handleNext}
             backgroundColor={colors.secondary}
             style={styles.assistanceButton}
           />

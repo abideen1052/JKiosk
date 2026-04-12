@@ -11,8 +11,11 @@ interface NameScreenProps {
   navigation: any;
 }
 
+import { useFlowStore } from '../../store/useFlowStore';
+
 const NameScreen = ({ navigation }: NameScreenProps) => {
-  const [name, setName] = useState('');
+  const { name: storedName, setName: setStoreName } = useFlowStore();
+  const [name, setName] = useState(storedName || '');
 
   const handleKeyPress = (key: string) => {
     setName(prev => prev + key);
@@ -27,7 +30,7 @@ const NameScreen = ({ navigation }: NameScreenProps) => {
   };
 
   const handleNext = () => {
-    console.log('Name entered:', name);
+    setStoreName(name.trim());
     navigation.navigate('Order');
   };
 

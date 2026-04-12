@@ -24,9 +24,11 @@ export const strings = {
   newEntry: 'New Entry',
   autoRedirect: 'Auto-redirecting in',
   welcomeBack: 'Welcome back,',
-  welcomeSub: 'We recognized your device. Please confirm your identity to proceed.',
+  welcomeSub:
+    'We recognized your device. Please confirm your identity to proceed.',
   yesThatsMe: "Yes, that's me",
   notMe: 'Not me',
   updateDetails: 'Update Details',
   deliveringFrom: 'DELIVERING FROM',
+  submit: 'SUBMIT',
 };

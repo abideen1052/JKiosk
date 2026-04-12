@@ -11,20 +11,18 @@ interface SuccessScreenProps {
   route?: any; // To receive order data
 }
 
+import { useFlowStore } from '../../store/useFlowStore';
+
 const SuccessScreen = ({ navigation }: SuccessScreenProps) => {
+  const { name, mobile, company, orderNumber, orderDate, resetFlow } = useFlowStore();
   const [seconds, setSeconds] = useState(8);
 
-  // Mock data or data from previous screen
   const orderDetails = {
-    company: 'CakeKiosk Express',
-    customerName: 'Alex Thompson',
-    mobileNumber: '+1 (555) 012-7294',
-    orderNumber: '#CK-7294',
-    date: new Date().toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    }),
+    company: company || 'Partner',
+    customerName: name || 'Rider',
+    mobileNumber: mobile,
+    orderNumber: orderNumber || 'N/A',
+    date: orderDate,
   };
 
   useEffect(() => {
@@ -43,6 +41,7 @@ const SuccessScreen = ({ navigation }: SuccessScreenProps) => {
   }, []);
 
   const handleNewEntry = () => {
+    resetFlow();
     navigation.reset({
       index: 0,
       routes: [{ name: 'Auth' }],

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { strings } from '../../theme/strings';
@@ -9,6 +9,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/AppNavigator';
 import { styles } from './styles';
 
+import { useFlowStore } from '../../store/useFlowStore';
+
 interface WelcomeBackScreenProps {
   navigation: NativeStackNavigationProp<RootStackParamList, 'WelcomeBack'>;
   route?: any;
@@ -17,10 +19,11 @@ interface WelcomeBackScreenProps {
 const isTablet = DeviceInfo.isTablet();
 
 const WelcomeBackScreen = ({ navigation }: WelcomeBackScreenProps) => {
-  // Mock data - In a real app, this would come from an API or route params
+  const { name, company } = useFlowStore();
+
   const userData = {
-    name: 'Alexander J. Rivera',
-    company: 'Talabat Partner',
+    name: name || 'Rider',
+    company: company || 'Partner',
     isVerified: true,
   };
 
@@ -60,6 +63,13 @@ const WelcomeBackScreen = ({ navigation }: WelcomeBackScreenProps) => {
                 textColor={colors.textSubHeader}
                 style={styles.notMeButton}
               />
+              <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => navigation.goBack()}
+                //disabled={loading}
+              >
+                <Text style={styles.backText}>{strings.back}</Text>
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -134,6 +144,13 @@ const WelcomeBackScreen = ({ navigation }: WelcomeBackScreenProps) => {
             textColor={colors.textSubHeader}
             style={styles.notMeButton}
           />
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => navigation.goBack()}
+            //disabled={loading}
+          >
+            <Text style={styles.backText}>{strings.back}</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     );
