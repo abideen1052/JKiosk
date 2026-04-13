@@ -21,6 +21,10 @@ export const styles = StyleSheet.create({
   },
   listContent: {
     paddingBottom: 100,
+    justifyContent: 'space-between',
+  },
+  row: {
+    justifyContent: 'space-between',
   },
   footer: {
     flexDirection: 'row',
@@ -73,4 +77,24 @@ export const styles = StyleSheet.create({
   snoonuCheck: { backgroundColor: colors.snoonu },
   rafeeqSelected: { borderColor: colors.rafeeq, borderWidth: 2 },
   rafeeqCheck: { backgroundColor: colors.rafeeq },
+  // Generic styles for dynamic companies
+  defaultBorder: { backgroundColor: colors.primary },
+  defaultSelected: { borderColor: colors.primary, borderWidth: 2 },
+  defaultCheck: { backgroundColor: colors.primary },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 50,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: colors.textMuted,
+    textAlign: 'center',
+  },
 });

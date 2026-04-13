@@ -1,28 +1,41 @@
-import React from 'react';
-import { View, TouchableOpacity, Image, ViewStyle, ImageSourcePropType, Text } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  ViewStyle,
+  ImageSourcePropType,
+  Text,
+} from 'react-native';
 import { styles } from './styles';
 
 interface CompanyCardProps {
   image: ImageSourcePropType;
+  fallbackImage: ImageSourcePropType;
   borderStyle: ViewStyle;
   onPress: () => void;
   isSelected?: boolean;
   selectedCardStyle?: ViewStyle;
   checkContainerStyle?: ViewStyle;
+  title?: string;
 }
 
-const CompanyCard: React.FC<CompanyCardProps> = ({ 
-  image, 
-  borderStyle, 
-  onPress, 
+const CompanyCard: React.FC<CompanyCardProps> = ({
+  image,
+  fallbackImage,
+  borderStyle,
+  onPress,
   isSelected,
   selectedCardStyle,
-  checkContainerStyle
+  checkContainerStyle,
+  title,
 }) => {
+  const [hasError, setHasError] = useState(false);
+
   return (
-    <TouchableOpacity 
-      style={[styles.card, isSelected && selectedCardStyle]} 
-      onPress={onPress} 
+    <TouchableOpacity
+      style={[styles.card, isSelected && selectedCardStyle]}
+      onPress={onPress}
       activeOpacity={0.8}
     >
       {isSelected && (
@@ -31,11 +44,15 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
         </View>
       )}
       <View style={[styles.leftBorder, borderStyle]} />
-      <Image 
-        source={image} 
-        style={styles.logo} 
-        resizeMode="cover" 
-      />
+      <View style={styles.content}>
+        {title && <Text style={styles.companyTitle}>{title}</Text>}
+        <Image
+          source={hasError ? fallbackImage : image}
+          style={styles.logo}
+          resizeMode="cover"
+          onError={() => setHasError(true)}
+        />
+      </View>
     </TouchableOpacity>
   );
 };

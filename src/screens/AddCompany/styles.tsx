@@ -1,0 +1,155 @@
+import { StyleSheet } from 'react-native';
+import { colors } from '../../theme/color';
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+    paddingHorizontal: 20,
+    paddingTop: 40,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  backButton: {
+    padding: 10,
+    marginRight: 10,
+  },
+  backText: {
+    fontSize: 24,
+    color: colors.textHeader,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: colors.textHeader,
+  },
+  form: {
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    padding: 24,
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 4,
+    margin: 2,
+  },
+  inputGroup: {
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: colors.textHeader,
+    marginBottom: 8,
+  },
+  input: {
+    backgroundColor: colors.background,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    height: 54,
+    fontSize: 16,
+    color: colors.textHeader,
+    borderWidth: 1,
+    borderColor: colors.footerBorder,
+  },
+  saveButton: {
+    marginTop: 20,
+    height: 54,
+    borderRadius: 12,
+  },
+  cancelButton: {
+    marginTop: 10,
+    height: 54,
+    borderRadius: 12,
+    backgroundColor: colors.greyLight,
+    borderWidth: 1,
+    borderColor: colors.footerBorder,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cancelText: {
+    color: colors.textSubHeader,
+    fontWeight: 'bold',
+  },
+  previewContainer: {
+    marginTop: 30,
+    alignItems: 'center',
+  },
+  previewLabel: {
+    fontSize: 14,
+    color: colors.textMuted,
+    marginBottom: 10,
+  },
+  previewImage: {
+    width: 120,
+    height: 120,
+    borderRadius: 15,
+    backgroundColor: colors.greyLight,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.footerBorder,
+    overflow: 'hidden',
+  },
+  previewImg: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+  },
+  placeholderText: {
+    color: colors.textMuted,
+    fontSize: 12,
+    textAlign: 'center',
+    padding: 10,
+  },
+  listHeader: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: colors.textHeader,
+    marginTop: 40,
+    marginBottom: 20,
+  },
+  companyItem: {
+    backgroundColor: colors.white,
+    borderRadius: 15,
+    padding: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
+    elevation: 2,
+    margin: 2,
+  },
+  itemLogo: {
+    width: 50,
+    height: 50,
+    borderRadius: 8,
+    backgroundColor: colors.background,
+    marginRight: 15,
+  },
+  itemInfo: {
+    flex: 1,
+  },
+  itemName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.textHeader,
+  },
+  itemActions: {
+    flexDirection: 'row',
+  },
+  actionButton: {
+    padding: 8,
+    marginLeft: 10,
+  },
+  actionIcon: {
+    fontSize: 18,
+  },
+});

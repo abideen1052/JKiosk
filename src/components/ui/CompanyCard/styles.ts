@@ -20,6 +20,18 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 10,
   },
+  content: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  companyTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: colors.textHeader,
+    marginBottom: 15,
+    textAlign: 'center',
+  },
   leftBorder: {
     position: 'absolute',
     left: 0,

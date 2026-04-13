@@ -22,21 +22,27 @@ const isTablet = DeviceInfo.isTablet();
 const AuthScreen = ({ navigation }: AuthScreenProps) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const handleNumberPress = (num: string) => {
     if (phoneNumber.length < 8) {
       setPhoneNumber(prev => prev + num);
+      setShowError(false);
     }
   };
 
   const handleDeletePress = () => {
     setPhoneNumber(prev => prev.slice(0, -1));
+    setShowError(false);
   };
 
   const { setMobile, setRiderDetails, resetFlow } = useFlowStore();
 
   const handleNextPress = async () => {
-    if (phoneNumber.length < 8) return;
+    if (phoneNumber.length < 8) {
+      setShowError(true);
+      return;
+    }
 
     setLoading(true);
     try {
@@ -91,10 +97,16 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
               containerStyle={styles.displayContainer}
             />
 
+            {showError && phoneNumber.length < 8 && (
+              <Text style={styles.errorText}>Please enter valid number</Text>
+            )}
+
             <CommonButton
               title={strings.next}
               onPress={handleNextPress}
               style={[styles.nextButton, styles.tabletNextButton]}
+              isLoading={loading}
+              disabled={loading}
             />
           </View>
 
@@ -133,6 +145,10 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
           containerStyle={styles.displayContainer}
         />
 
+        {showError && phoneNumber.length < 8 && (
+          <Text style={styles.errorText}>Please enter 8 digits</Text>
+        )}
+
         <CustomKeypad
           onNumberPress={handleNumberPress}
           onDeletePress={handleDeletePress}
@@ -146,6 +162,7 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
           onPress={handleNextPress}
           style={styles.nextButton}
           isLoading={loading}
+          disabled={loading}
         />
 
         <TouchableOpacity

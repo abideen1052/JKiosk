@@ -1,103 +1,31 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  FlatList,
-  TouchableOpacity,
-  ActivityIndicator,
-  StatusBar,
-} from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, StatusBar } from 'react-native';
 import { styles } from './styles';
-import { colors } from '../../theme/color';
-import { getAllDeliveryLogs } from '../../lib/riderService';
-import { useDebounce } from '../../hooks/useDebounce';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import AdminDropdown from '../../components/ui/AdminDropdown';
-
-interface DeliveryLog {
-  id: string;
-  mobile: string;
-  rider_name: string;
-  company: string;
-  order_number: string;
-  order_date: string;
-  created_at: string;
-}
-
-const COMPANIES_ITEMS = [
-  { label: 'All Companies', value: 'All' },
-  { label: 'Talabat', value: 'Talabat' },
-  { label: 'Keeta', value: 'Keeta' },
-  { label: 'Snoonu', value: 'Snoonu' },
-  { label: 'Rafeeq', value: 'Rafeeq' },
-];
 
 const AdminScreen = ({ navigation }: any) => {
-  const [logs, setLogs] = useState<DeliveryLog[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCompany, setSelectedCompany] = useState('All');
-  
-  // Logic for generating last 12 months
-  const generateMonthsList = () => {
-    const months = [];
-    const date = new Date();
-    const monthNames = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
-    ];
+  const menuOptions = [
+    {
+      title: 'Get Report',
+      description: 'View and export delivery logs',
+      icon: '📊',
+      screen: 'Report',
+    },
+    {
+      title: 'Add Company',
+      description: 'Add new delivery companies to the system',
+      icon: '🏢',
+      screen: 'AddCompany', // Placeholder for now
+    },
+  ];
 
-    for (let i = 0; i < 12; i++) {
-      const m = date.getMonth();
-      const y = date.getFullYear();
-      
-      const value = `${y}-${(m + 1).toString().padStart(2, '0')}`;
-      const label = `${monthNames[m]} ${y}`;
-      
-      months.push({ label, value });
-      date.setMonth(date.getMonth() - 1);
+  const handlePress = (screen: string) => {
+    if (screen === 'Report' || screen === 'AddCompany') {
+      navigation.navigate(screen);
+    } else {
+      console.log(`Navigate to ${screen}`);
     }
-    return months;
   };
-
-  const monthItems = generateMonthsList();
-  const [selectedMonth, setSelectedMonth] = useState(monthItems[0].value);
-
-  const debouncedSearch = useDebounce(searchQuery, 500);
-
-  const fetchLogs = useCallback(async () => {
-    setLoading(true);
-    const data = await getAllDeliveryLogs({
-      company: selectedCompany,
-      month: selectedMonth,
-      search: debouncedSearch,
-    });
-    setLogs(data || []);
-    setLoading(false);
-  }, [selectedCompany, selectedMonth, debouncedSearch]);
-
-  useEffect(() => {
-    fetchLogs();
-  }, [fetchLogs]);
-
-  const renderLogItem = ({ item }: { item: DeliveryLog }) => (
-    <View style={styles.logCard}>
-      <View style={styles.cardHeader}>
-        <Text style={styles.orderNumber}>#{item.order_number}</Text>
-        <View style={styles.companyBadge}>
-          <Text style={styles.companyText}>{item.company}</Text>
-        </View>
-      </View>
-      <View style={styles.cardBody}>
-        <View>
-          <Text style={styles.riderName}>{item.rider_name}</Text>
-          <Text style={styles.mobileText}>{item.mobile}</Text>
-        </View>
-        <Text style={styles.dateText}>{item.order_date}</Text>
-      </View>
-    </View>
-  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -113,51 +41,24 @@ const AdminScreen = ({ navigation }: any) => {
         <Text style={styles.title}>Admin Panel</Text>
       </View>
 
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search by Order ID..."
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          placeholderTextColor={colors.textMuted}
-        />
-      </View>
-
-      <View style={styles.filtersRow}>
-        <AdminDropdown
-          label="Company"
-          value={selectedCompany}
-          items={COMPANIES_ITEMS}
-          onSelect={setSelectedCompany}
-        />
-        <AdminDropdown
-          label="Month"
-          value={selectedMonth}
-          items={monthItems}
-          onSelect={setSelectedMonth}
-        />
-      </View>
-
-      {loading ? (
-        <ActivityIndicator
-          size="large"
-          color={colors.primary}
-          style={styles.loadingIndicator}
-        />
-      ) : (
-        <FlatList
-          data={logs}
-          renderItem={renderLogItem}
-          keyExtractor={item => item.id}
-          contentContainerStyle={styles.listContainer}
-          showsVerticalScrollIndicator={false}
-          ListEmptyComponent={
-            <View style={styles.emptyContainer}>
-              <Text style={styles.emptyText}>No entries found</Text>
+      <View style={styles.menuContainer}>
+        {menuOptions.map((option, index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.menuCard}
+            onPress={() => handlePress(option.screen)}
+          >
+            <View style={styles.iconContainer}>
+              <Text style={styles.iconText}>{option.icon}</Text>
             </View>
-          }
-        />
-      )}
+            <View style={styles.menuTextContainer}>
+              <Text style={styles.menuTitle}>{option.title}</Text>
+              <Text style={styles.menuDescription}>{option.description}</Text>
+            </View>
+            <Text style={styles.arrowText}>→</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
     </SafeAreaView>
   );
 };

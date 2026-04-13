@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 40,
   },
   backButton: {
     padding: 10,
@@ -26,104 +26,51 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.textHeader,
   },
-  searchContainer: {
+  menuContainer: {
+    flex: 1,
+  },
+  menuCard: {
     backgroundColor: colors.white,
-    borderRadius: 12,
-    paddingHorizontal: 15,
-    height: 50,
-    justifyContent: 'center',
+    borderRadius: 20,
+    padding: 20,
     marginBottom: 20,
-    borderWidth: 1,
-    borderColor: colors.footerBorder,
-  },
-  searchInput: {
-    fontSize: 16,
-    color: colors.textHeader,
-  },
-  filtersRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  filterItem: {
-    flex: 0.48,
-    backgroundColor: colors.white,
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    height: 45,
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: colors.footerBorder,
-  },
-  filterText: {
-    fontSize: 14,
-    color: colors.textSubHeader,
-  },
-  listContainer: {
-    paddingBottom: 40,
-  },
-  logCard: {
-    backgroundColor: colors.white,
-    borderRadius: 15,
-    padding: 15,
-    marginBottom: 15,
-    borderLeftWidth: 5,
-    borderLeftColor: colors.primary,
+    alignItems: 'center',
     shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 5,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 4,
   },
-  cardHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
+  iconContainer: {
+    width: 60,
+    height: 60,
+    borderRadius: 15,
+    backgroundColor: colors.background, // Or a lighter version of primary
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 15,
   },
-  orderNumber: {
+  iconText: {
+    fontSize: 30,
+  },
+  menuTextContainer: {
+    flex: 1,
+  },
+  menuTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: colors.textHeader,
-  },
-  companyBadge: {
-    backgroundColor: colors.greyLight,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 5,
-  },
-  companyText: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: colors.textMuted,
-  },
-  cardBody: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-  },
-  riderName: {
-    fontSize: 16,
-    color: colors.textHeader,
     marginBottom: 4,
   },
-  mobileText: {
+  menuDescription: {
     fontSize: 14,
     color: colors.textMuted,
+    lineHeight: 20,
   },
-  dateText: {
-    fontSize: 12,
-    color: colors.textMuted,
-    fontStyle: 'italic',
-  },
-  emptyContainer: {
-    alignItems: 'center',
-    marginTop: 100,
-  },
-  emptyText: {
-    fontSize: 16,
-    color: colors.textMuted,
-  },
-  loadingIndicator: {
-    marginTop: 50,
+  arrowText: {
+    fontSize: 24,
+    color: colors.primary,
+    marginLeft: 10,
   },
 });

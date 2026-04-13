@@ -42,6 +42,14 @@ export const styles = StyleSheet.create({
     marginBottom: 40,
     maxWidth: '90%',
   },
+  errorText: {
+    color: colors.primary,
+    fontSize: 14,
+    marginTop: 5,
+    marginBottom: 5,
+    fontWeight: '500',
+    textAlign: 'center',
+  },
   displayContainer: {
     marginBottom: 20,
   },
