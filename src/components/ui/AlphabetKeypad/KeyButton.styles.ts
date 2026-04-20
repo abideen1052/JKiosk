@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.white,
     borderRadius: 8,
-    height: 50,
+    height: 80,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 4,

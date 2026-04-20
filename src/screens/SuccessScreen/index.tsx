@@ -44,7 +44,6 @@ const SuccessScreen = ({ navigation }: SuccessScreenProps) => {
       setSeconds(prev => {
         if (prev <= 1) {
           clearInterval(timer);
-          handleNewEntry();
           return 0;
         }
         return prev - 1;
@@ -56,6 +55,12 @@ const SuccessScreen = ({ navigation }: SuccessScreenProps) => {
       releaseBeep();
     };
   }, []);
+
+  useEffect(() => {
+    if (seconds === 0) {
+      handleNewEntry();
+    }
+  }, [seconds]);
 
   const handleNewEntry = () => {
     resetFlow();
