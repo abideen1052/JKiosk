@@ -11,7 +11,6 @@ import { styles } from './styles';
 import { strings } from '../../theme/strings';
 import { colors } from '../../theme/color';
 import CompanyCard from '../../components/ui/CompanyCard';
-import CommonButton from '../../components/ui/CommonButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFlowStore } from '../../store/useFlowStore';
 import { useCompanyStore } from '../../store/useCompanyStore';
@@ -49,12 +48,10 @@ const CompanySelectionScreen = ({
     }
   }, [companies, storedCompany]);
 
-  const handleNext = () => {
-    const selectedCompany = companies.find(c => c.id === selectedId);
-    if (selectedCompany) {
-      setCompany(selectedCompany.name);
-      navigation.navigate('Name');
-    }
+  const handleSelect = (item: any) => {
+    setSelectedId(item.id);
+    setCompany(item.name);
+    navigation.navigate('Name');
   };
 
   const getCompanyStyles = (name: string) => {
@@ -96,9 +93,10 @@ const CompanySelectionScreen = ({
 
   const renderItem = ({ item }: { item: any }) => {
     const companyStyles = getCompanyStyles(item.name);
-    const imageSource = (item.logo_url && item.logo_url.startsWith('http'))
-      ? { uri: item.logo_url }
-      : placeholderImg;
+    const imageSource =
+      item.logo_url && item.logo_url.startsWith('http')
+        ? { uri: item.logo_url }
+        : placeholderImg;
 
     return (
       <CompanyCard
@@ -109,7 +107,7 @@ const CompanySelectionScreen = ({
         isSelected={selectedId === item.id}
         selectedCardStyle={companyStyles.selectedStyle}
         checkContainerStyle={companyStyles.checkStyle}
-        onPress={() => setSelectedId(item.id)}
+        onPress={() => handleSelect(item)}
       />
     );
   };
@@ -136,9 +134,16 @@ const CompanySelectionScreen = ({
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={
               <View style={styles.emptyContainer}>
-                <Text style={styles.emptyText}>No delivery partners found.</Text>
+                <Text style={styles.emptyText}>
+                  No delivery partners found.
+                </Text>
                 <TouchableOpacity onPress={() => fetchCompanies(true)}>
-                  <Text style={[styles.emptyText, { color: colors.primary, marginTop: 10 }]}>
+                  <Text
+                    style={[
+                      styles.emptyText,
+                      { color: colors.primary, marginTop: 10 },
+                    ]}
+                  >
                     Retry
                   </Text>
                 </TouchableOpacity>
@@ -154,14 +159,6 @@ const CompanySelectionScreen = ({
           >
             <Text style={styles.backText}>{strings.back}</Text>
           </TouchableOpacity>
-
-          <CommonButton
-            title={strings.next}
-            onPress={handleNext}
-            backgroundColor={colors.secondary}
-            style={styles.assistanceButton}
-            disabled={!selectedId}
-          />
         </View>
       </View>
     </SafeAreaView>

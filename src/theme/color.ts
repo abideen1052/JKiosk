@@ -21,7 +21,7 @@ export const colors = {
   cardBorder: '#F0F0F0',
   footerBorder: '#E5E7EB',
   backButtonText: '#8B340B',
-  successGreen: '#4CAF50',
+  successGreen: '#2E7D32',
   successBg: '#E8F5E9',
   orderHighlight: '#FFE5D9',
 };

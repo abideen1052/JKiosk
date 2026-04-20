@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Text, StatusBar, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from './styles';
 import { strings } from '../../theme/strings';
 import { colors } from '../../theme/color';
 import CommonButton from '../../components/ui/CommonButton';
+import { loadBeep, playBeep, releaseBeep } from '../../lib/sound';
+import { Check } from 'lucide-react-native';
 
 interface SuccessScreenProps {
   navigation: any;
@@ -14,8 +16,10 @@ interface SuccessScreenProps {
 import { useFlowStore } from '../../store/useFlowStore';
 
 const SuccessScreen = ({ navigation }: SuccessScreenProps) => {
-  const { name, mobile, company, orderNumber, orderDate, resetFlow } = useFlowStore();
+  const { name, mobile, company, orderNumber, orderDate, resetFlow } =
+    useFlowStore();
   const [seconds, setSeconds] = useState(8);
+  const tickScaleAnim = useRef(new Animated.Value(0)).current;
 
   const orderDetails = {
     company: company || 'Partner',
@@ -26,6 +30,16 @@ const SuccessScreen = ({ navigation }: SuccessScreenProps) => {
   };
 
   useEffect(() => {
+    loadBeep(() => {
+      playBeep();
+    });
+    setTimeout(() => {
+      Animated.timing(tickScaleAnim, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    }, 300);
     const timer = setInterval(() => {
       setSeconds(prev => {
         if (prev <= 1) {
@@ -37,7 +51,10 @@ const SuccessScreen = ({ navigation }: SuccessScreenProps) => {
       });
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      releaseBeep();
+    };
   }, []);
 
   const handleNewEntry = () => {
@@ -55,7 +72,13 @@ const SuccessScreen = ({ navigation }: SuccessScreenProps) => {
       <View style={styles.container}>
         {/* Success Icon */}
         <View style={styles.successIconContainer}>
-          <Text style={styles.successIcon}>✓</Text>
+          <Animated.View
+            style={{
+              transform: [{ scale: tickScaleAnim }],
+            }}
+          >
+            <Check size={100} color="#FFFFFF" strokeWidth={5} />
+          </Animated.View>
         </View>
 
         <Text style={styles.doneTitle}>{strings.done}</Text>
