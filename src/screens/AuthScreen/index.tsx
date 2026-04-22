@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, StatusBar, TouchableOpacity, Image } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { styles } from './styles';
 import { strings } from '../../theme/strings';
@@ -18,6 +18,7 @@ interface AuthScreenProps {
 }
 
 const isTablet = DeviceInfo.isTablet();
+const logo = require('../../assets/images/aiPOS.png');
 
 const AuthScreen = ({ navigation }: AuthScreenProps) => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -86,6 +87,9 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
       return (
         <View style={[styles.container, styles.tabletContainer]}>
           <View style={styles.leftSection}>
+            <View style={styles.logoContainer}>
+              <Image source={logo} style={styles.logo} resizeMode="contain" />
+            </View>
             <Text style={[styles.title, styles.tabletTitle]}>
               {strings.enterMobileNumber}
             </Text>
@@ -135,6 +139,9 @@ const AuthScreen = ({ navigation }: AuthScreenProps) => {
           barStyle="dark-content"
           backgroundColor={colors.background}
         />
+        <View style={styles.logoContainer}>
+          <Image source={logo} style={styles.logo} resizeMode="contain" />
+        </View>
 
         <Text style={styles.title}>{strings.enterMobileNumber}</Text>
         <Text style={styles.subtitle}>{strings.subtitleMobileSecondary}</Text>

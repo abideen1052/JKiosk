@@ -10,8 +10,8 @@ const URL_PROD = 'https://auliemgklqjihvlqngaj.supabase.co';
 const KEY_PROD =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1bGllbWdrbHFqaWh2bHFuZ2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MTE1NDEsImV4cCI6MjA5MTQ4NzU0MX0.1o5bDW9lruQE2TRqMMIr86_Y7QqFoeNJQMjnaM6TTWY';
 
-const SUPABASE_URL = URL_PROD;
-const SUPABASE_ANON_KEY = KEY_PROD;
+const SUPABASE_URL = URL_DEV;
+const SUPABASE_ANON_KEY = KEY_DEV;
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {

@@ -18,6 +18,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingRight: 40,
   },
+  logoContainer: {
+    alignItems: 'flex-start',
+  },
+  logo: {
+    width: 200,
+    height: 100,
+  },
   rightSection: {
     flex: 1,
     alignItems: 'flex-end',

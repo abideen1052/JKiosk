@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StatusBar } from 'react-native';
+import { View, Text, TouchableOpacity, StatusBar, Image } from 'react-native';
 import { styles } from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { strings } from '../../theme/strings';
 
+const logo = require('../../assets/images/aiPOS.png');
 const AdminScreen = ({ navigation }: any) => {
   const menuOptions = [
     {
@@ -32,12 +34,10 @@ const AdminScreen = ({ navigation }: any) => {
       <StatusBar barStyle="dark-content" />
 
       <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.backText}>←</Text>
-        </TouchableOpacity>
+        <View style={styles.logoContainer}>
+          <Image source={logo} style={styles.logo} resizeMode="contain" />
+        </View>
+
         <Text style={styles.title}>Admin Panel</Text>
       </View>
 
@@ -58,6 +58,14 @@ const AdminScreen = ({ navigation }: any) => {
             <Text style={styles.arrowText}>→</Text>
           </TouchableOpacity>
         ))}
+        <View style={styles.footer}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => navigation.goBack()}
+          >
+            <Text style={styles.backText}>{strings.back}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );

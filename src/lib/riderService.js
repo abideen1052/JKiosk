@@ -36,11 +36,12 @@ export const saveNewRider = async (mobile, name, company) => {
   }
 };
 
-export const updateRiderLastSeen = async (mobile, company) => {
+export const updateRiderDetails = async (mobile, name, company) => {
   try {
     const { error } = await supabase
       .from('riders')
       .update({
+        name,
         last_seen: new Date().toISOString(),
         company,
       })

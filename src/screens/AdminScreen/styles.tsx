@@ -6,25 +6,30 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
     paddingHorizontal: 20,
-    paddingTop: 40,
+    paddingTop: 20,
   },
   header: {
-    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 40,
+    height: 100,
   },
-  backButton: {
-    padding: 10,
-    marginRight: 10,
-  },
-  backText: {
-    fontSize: 24,
-    color: colors.textHeader,
-  },
+
   title: {
     fontSize: 28,
     fontWeight: 'bold',
+    alignSelf: 'center',
     color: colors.textHeader,
+  },
+  logoContainer: {
+    position: 'absolute',
+    alignItems: 'flex-start',
+    left: 0,
+    top: 5,
+  },
+  logo: {
+    width: 200,
+    height: 100,
   },
   menuContainer: {
     flex: 1,
@@ -72,5 +77,31 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     color: colors.primary,
     marginLeft: 10,
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 20,
+    backgroundColor: colors.background,
+    position: 'absolute',
+    bottom: 0,
+    left: 25,
+    right: 25,
+  },
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: colors.footerBorder,
+  },
+  backText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: colors.backButtonText,
   },
 });

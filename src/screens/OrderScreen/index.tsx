@@ -12,7 +12,7 @@ import { useFlowStore } from '../../store/useFlowStore';
 import {
   saveNewRider,
   saveDeliveryLog,
-  updateRiderLastSeen,
+  updateRiderDetails,
 } from '../../lib/riderService';
 
 interface OrderScreenProps {
@@ -49,7 +49,7 @@ const OrderScreen = ({ navigation }: OrderScreenProps) => {
     setLoading(true);
     try {
       if (isReturning) {
-        await updateRiderLastSeen(mobile, company);
+        await updateRiderDetails(mobile, name, company);
       } else {
         await saveNewRider(mobile, name, company);
       }
