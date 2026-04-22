@@ -16,10 +16,10 @@ export const styles = StyleSheet.create({
   leftSection: {
     flex: 1,
     justifyContent: 'center',
-    paddingRight: 40,
   },
   logoContainer: {
     alignItems: 'flex-start',
+    marginTop: -40,
   },
   logo: {
     width: 200,
@@ -79,10 +79,10 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 30,
     alignSelf: 'center',
-    left: 0,
-    right: 0,
+    right: 150,
     alignItems: 'center',
     padding: 15,
+    width: 250,
   },
   adminText: {
     color: colors.textMuted,
