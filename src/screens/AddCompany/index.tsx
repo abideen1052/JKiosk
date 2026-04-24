@@ -15,7 +15,7 @@ import { styles } from './styles';
 import { colors } from '../../theme/color';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CommonButton from '../../components/ui/CommonButton';
-import { createCompany, updateCompany, deleteCompany } from '../../lib/companyService';
+import { saveCompany, deleteCompany } from '../../lib/storage';
 import { useCompanyStore } from '../../store/useCompanyStore';
 
 const AddCompanyScreen = ({ navigation }: any) => {
@@ -40,11 +40,11 @@ const AddCompanyScreen = ({ navigation }: any) => {
     setIsSaving(true);
     try {
       if (editingId) {
-        const updated = await updateCompany(editingId, name.trim(), logoUrl.trim());
+        const updated = await saveCompany(name.trim(), logoUrl.trim(), editingId);
         updateCompanyInStore(updated);
         Alert.alert('Success', 'Company updated successfully');
       } else {
-        const newCompany = await createCompany(name.trim(), logoUrl.trim());
+        const newCompany = await saveCompany(name.trim(), logoUrl.trim());
         addCompanyToStore(newCompany);
         Alert.alert('Success', 'Company added successfully');
       }

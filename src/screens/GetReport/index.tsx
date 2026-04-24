@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { styles } from './styles';
 import { colors } from '../../theme/color';
-import { getAllDeliveryLogs } from '../../lib/riderService';
+import { getLogs } from '../../lib/storage';
 import { useDebounce } from '../../hooks/useDebounce';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AdminDropdown from '../../components/ui/AdminDropdown';
@@ -19,11 +19,11 @@ import { useCompanyStore } from '../../store/useCompanyStore';
 interface DeliveryLog {
   id: string;
   mobile: string;
-  rider_name: string;
+  name: string;
   company: string;
-  order_number: string;
-  order_date: string;
-  created_at: string;
+  orderNumber: string;
+  orderDate: string;
+  createdAt: string;
 }
 
 const GetReportScreen = ({ navigation }: any) => {
@@ -71,7 +71,7 @@ const GetReportScreen = ({ navigation }: any) => {
 
   const fetchLogs = useCallback(async () => {
     setLoading(true);
-    const data = await getAllDeliveryLogs({
+    const data = await getLogs({
       company: selectedCompany,
       month: selectedMonth,
       search: debouncedSearch,
@@ -87,17 +87,17 @@ const GetReportScreen = ({ navigation }: any) => {
   const renderLogItem = ({ item }: { item: DeliveryLog }) => (
     <View style={styles.logCard}>
       <View style={styles.cardHeader}>
-        <Text style={styles.orderNumber}>#{item.order_number}</Text>
+        <Text style={styles.orderNumber}>#{item.orderNumber}</Text>
         <View style={styles.companyBadge}>
           <Text style={styles.companyText}>{item.company}</Text>
         </View>
       </View>
       <View style={styles.cardBody}>
         <View>
-          <Text style={styles.riderName}>{item.rider_name}</Text>
+          <Text style={styles.riderName}>{item.name}</Text>
           <Text style={styles.mobileText}>{item.mobile}</Text>
         </View>
-        <Text style={styles.dateText}>{item.order_date}</Text>
+        <Text style={styles.dateText}>{item.orderDate}</Text>
       </View>
     </View>
   );

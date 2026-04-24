@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { getAllCompanies } from '../lib/companyService';
+import { getCompanies } from '../lib/storage';
 
 interface Company {
   id: string;
@@ -39,7 +39,7 @@ export const useCompanyStore = create<CompanyState>((set, get) => ({
 
     set({ loading: true, error: null });
     try {
-      const data = await getAllCompanies();
+      const data = await getCompanies();
       set({ 
         companies: data || [], 
         loading: false, 

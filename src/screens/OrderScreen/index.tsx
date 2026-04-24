@@ -11,9 +11,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFlowStore } from '../../store/useFlowStore';
 import {
   saveNewRider,
-  saveDeliveryLog,
+  saveLog,
   updateRiderDetails,
-} from '../../lib/riderService';
+} from '../../lib/storage';
 
 interface OrderScreenProps {
   navigation: any;
@@ -53,7 +53,7 @@ const OrderScreen = ({ navigation }: OrderScreenProps) => {
       } else {
         await saveNewRider(mobile, name, company);
       }
-      await saveDeliveryLog(mobile, name, company, orderNumber);
+      await saveLog(mobile, name, company, orderNumber);
       setStoreOrderNumber(orderNumber);
       navigation.navigate('Success');
     } catch (error) {

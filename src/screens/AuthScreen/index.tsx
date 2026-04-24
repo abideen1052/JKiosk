@@ -10,7 +10,7 @@ import CommonButton from '../../components/ui/CommonButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/AppNavigator';
-import { getRiderByMobile } from '../../lib/riderService';
+import { getRiderByMobile } from '../../lib/storage';
 import { useFlowStore } from '../../store/useFlowStore';
 
 interface AuthScreenProps {
