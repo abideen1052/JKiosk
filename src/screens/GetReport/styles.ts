@@ -126,4 +126,45 @@ export const styles = StyleSheet.create({
   loadingIndicator: {
     marginTop: 50,
   },
+  actionRow: {
+    flexDirection: 'row',
+    gap: 8,
+    paddingVertical: 10,
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  exportBtn: {
+    backgroundColor: '#27500A',
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 8,
+  },
+  exportBtnText: {
+    color: '#C0DD97',
+    fontWeight: '600',
+    fontSize: 13,
+  },
+  emailBtn: {
+    flex: 1,
+    backgroundColor: '#111',
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  emailBtnText: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 13,
+  },
+  editEmailBtn: {
+    backgroundColor: '#f0f0f0',
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 8,
+  },
+  editEmailText: {
+    fontSize: 16,
+    color: '#333',
+  },
 });

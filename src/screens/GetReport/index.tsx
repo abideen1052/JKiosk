@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   StatusBar,
+  Alert,
 } from 'react-native';
 import { styles } from './styles';
 import { colors } from '../../theme/color';
@@ -15,6 +16,9 @@ import { useDebounce } from '../../hooks/useDebounce';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AdminDropdown from '../../components/ui/AdminDropdown';
 import { useCompanyStore } from '../../store/useCompanyStore';
+import { getSavedEmail } from '../../lib/mailSettings';
+import { shareExcelFile } from '../../lib/exportService';
+import EmailModal from '../../components/ui/EmailModal';
 
 interface DeliveryLog {
   id: string;
@@ -33,31 +37,64 @@ const GetReportScreen = ({ navigation }: any) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCompany, setSelectedCompany] = useState('All');
 
+  const [emailModalVisible, setEmailModalVisible] = useState(false);
+  const [savedEmail, setSavedEmail] = useState('');
+
+  useEffect(() => {
+    getSavedEmail().then(setSavedEmail);
+  }, []);
+
   useEffect(() => {
     fetchCompanies();
   }, [fetchCompanies]);
 
+  const handleExport = async () => {
+    if (!savedEmail) {
+      setEmailModalVisible(true);
+      return;
+    }
+    try {
+      await shareExcelFile(
+        logs,
+        `${selectedCompany}_${selectedMonth}`,
+        savedEmail,
+      );
+    } catch (err: any) {
+      Alert.alert('Export Failed', err.message);
+    }
+  };
+
   const companyOptions = [
     { label: 'All Companies', value: 'All' },
-    ...companies.map(c => ({ label: c.name, value: c.name }))
+    ...companies.map(c => ({ label: c.name, value: c.name })),
   ];
-  
+
   // Logic for generating last 12 months
   const generateMonthsList = () => {
     const months = [];
     const date = new Date();
     const monthNames = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
 
     for (let i = 0; i < 12; i++) {
       const m = date.getMonth();
       const y = date.getFullYear();
-      
+
       const value = `${y}-${(m + 1).toString().padStart(2, '0')}`;
       const label = `${monthNames[m]} ${y}`;
-      
+
       months.push({ label, value });
       date.setMonth(date.getMonth() - 1);
     }
@@ -140,6 +177,28 @@ const GetReportScreen = ({ navigation }: any) => {
           onSelect={setSelectedMonth}
         />
       </View>
+      {/* Action Buttons */}
+      <View style={styles.actionRow}>
+        <TouchableOpacity onPress={handleExport} style={styles.exportBtn}>
+          <Text style={styles.exportBtnText}>Export Excel</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => setEmailModalVisible(true)}
+          style={styles.editEmailBtn}
+        >
+          <Text style={styles.editEmailText}>
+            {!savedEmail ? 'Add Email' : 'Update Email'}
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Email Modal */}
+      <EmailModal
+        visible={emailModalVisible}
+        onClose={() => setEmailModalVisible(false)}
+        onSave={setSavedEmail}
+      />
 
       {loading ? (
         <ActivityIndicator
