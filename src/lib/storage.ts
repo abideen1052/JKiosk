@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const KEYS = {
   COMPANIES: '@companies',
   DELIVERY_LOGS: '@delivery_logs',
+  CLIENT_SESSION: '@client_session',
 };
 
 // Helper for parsing JSON safely
@@ -144,3 +145,30 @@ export const deleteCompany = async (id: string) => {
 // No-op compatibility functions for redundant Rider table logic
 export const saveNewRider = async () => true;
 export const updateRiderDetails = async () => true;
+
+// Client Session management
+export const saveClientSession = async (client: any) => {
+  try {
+    await AsyncStorage.setItem(KEYS.CLIENT_SESSION, JSON.stringify(client));
+  } catch (error) {
+    console.error('Error in saveClientSession:', error);
+  }
+};
+
+export const getClientSession = async () => {
+  try {
+    const data = await AsyncStorage.getItem(KEYS.CLIENT_SESSION);
+    return safeParse(data);
+  } catch (error) {
+    console.error('Error in getClientSession:', error);
+    return null;
+  }
+};
+
+export const clearClientSession = async () => {
+  try {
+    await AsyncStorage.removeItem(KEYS.CLIENT_SESSION);
+  } catch (error) {
+    console.error('Error in clearClientSession:', error);
+  }
+};

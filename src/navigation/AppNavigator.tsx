@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { getClientSession } from '../lib/storage';
 
 import AuthScreen from '../screens/AuthScreen';
+import LoginScreen from '../screens/LoginScreen';
 import CompanySelectionScreen from '../screens/CompanySelectionScreen';
 import NameScreen from '../screens/NameScreen';
 import OrderScreen from '../screens/OrderScreen';
@@ -13,6 +15,7 @@ import AddCompanyScreen from '../screens/AddCompany';
 
 export type RootStackParamList = {
   Auth: undefined;
+  Login: undefined;
   CompanySelection: undefined;
   Name: undefined;
   Order: undefined;
@@ -26,11 +29,32 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
+  const [initialRoute, setInitialRoute] = useState<keyof RootStackParamList | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const session = await getClientSession();
+      if (session) {
+        setInitialRoute('Auth');
+      } else {
+        setInitialRoute('Login');
+      }
+    };
+    checkSession();
+  }, []);
+
+  if (!initialRoute) {
+    return null; // Or a loading screen
+  }
+
   return (
     <Stack.Navigator
-      initialRouteName="Auth"
+      initialRouteName={initialRoute}
       screenOptions={{ headerShown: false }}
     >
+      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Auth" component={AuthScreen} />
       <Stack.Screen
         name="CompanySelection"

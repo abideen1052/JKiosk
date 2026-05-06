@@ -31,4 +31,13 @@ export const strings = {
   updateDetails: 'Update Details',
   deliveringFrom: 'DELIVERING FROM',
   submit: 'SUBMIT',
+  login: 'LOGIN',
+  email: 'Email',
+  password: 'Password',
+  enterEmail: 'Enter your email',
+  enterPassword: 'Enter your password',
+  loginError: 'Invalid email or password',
+  deviceMismatch: 'This account is linked to another device',
+  deviceLinked: 'Device linked successfully',
 };
+

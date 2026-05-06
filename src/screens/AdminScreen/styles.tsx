@@ -104,4 +104,17 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     color: colors.backButtonText,
   },
+  logoutButton: {
+    backgroundColor: '#FFEBEE',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: '#FFCDD2',
+  },
+  logoutText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#D32F2F',
+  },
 });

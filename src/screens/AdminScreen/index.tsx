@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StatusBar, Image } from 'react-native';
 import { styles } from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { strings } from '../../theme/strings';
+import { clearClientSession } from '../../lib/storage';
 
 const logo = require('../../assets/images/aiPOS.png');
 const AdminScreen = ({ navigation }: any) => {
@@ -27,6 +28,14 @@ const AdminScreen = ({ navigation }: any) => {
     } else {
       console.log(`Navigate to ${screen}`);
     }
+  };
+
+  const handleLogout = async () => {
+    await clearClientSession();
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Login' }],
+    });
   };
 
   return (
@@ -64,6 +73,10 @@ const AdminScreen = ({ navigation }: any) => {
             onPress={() => navigation.goBack()}
           >
             <Text style={styles.backText}>{strings.back}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+            <Text style={styles.logoutText}>LOGOUT</Text>
           </TouchableOpacity>
         </View>
       </View>
