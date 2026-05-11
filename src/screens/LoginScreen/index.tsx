@@ -8,7 +8,9 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
+import { Eye, EyeOff } from 'lucide-react-native';
 import DeviceInfo from 'react-native-device-info';
 import { styles } from './styles';
 import { strings } from '../../theme/strings';
@@ -29,11 +31,15 @@ const logo = require('../../assets/images/aiPOS.png');
 const LoginScreen = ({ navigation }: LoginScreenProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async () => {
-    if (!email || !password) {
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedEmail || !trimmedPassword) {
       setError('Please enter both email and password');
       return;
     }
@@ -42,7 +48,7 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
     setError(null);
 
     try {
-      const result = await loginClient(email, password);
+      const result = await loginClient(trimmedEmail, trimmedPassword);
 
       if (result.success) {
         navigation.replace('Auth');
@@ -69,19 +75,33 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
           onChangeText={setEmail}
           autoCapitalize="none"
           keyboardType="email-address"
+          autoCorrect={false}
         />
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.label}>{strings.password}</Text>
-        <TextInput
-          style={styles.input}
-          placeholder={strings.enterPassword}
-          placeholderTextColor={colors.textMuted}
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.passwordInput}
+            placeholder={strings.enterPassword}
+            placeholderTextColor={colors.textMuted}
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+            autoCorrect={false}
+          />
+          <TouchableOpacity 
+            style={styles.eyeIcon} 
+            onPress={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <EyeOff size={20} color={colors.textMuted} />
+            ) : (
+              <Eye size={20} color={colors.textMuted} />
+            )}
+          </TouchableOpacity>
+        </View>
       </View>
 
       {error && <Text style={styles.errorText}>{error}</Text>}

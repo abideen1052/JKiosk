@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { styles } from './styles';
 import { colors } from '../../theme/color';
-import { getLogs } from '../../lib/storage';
+import { getLogs, clearAllLogs } from '../../lib/storage';
 import { useDebounce } from '../../hooks/useDebounce';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AdminDropdown from '../../components/ui/AdminDropdown';
@@ -62,6 +62,29 @@ const GetReportScreen = ({ navigation }: any) => {
     } catch (err: any) {
       Alert.alert('Export Failed', err.message);
     }
+  };
+
+  const handleClearLogs = () => {
+    Alert.alert(
+      'Clear All Logs',
+      'Are you sure you want to clear all the logs? This action cannot be undone and you will lose all report data.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Clear',
+          style: 'destructive',
+          onPress: async () => {
+            const success = await clearAllLogs();
+            if (success) {
+              setLogs([]);
+              Alert.alert('Success', 'All logs have been cleared successfully.');
+            } else {
+              Alert.alert('Error', 'Failed to clear logs.');
+            }
+          },
+        },
+      ]
+    );
   };
 
   const companyOptions = [
@@ -190,6 +213,13 @@ const GetReportScreen = ({ navigation }: any) => {
           <Text style={styles.editEmailText}>
             {!savedEmail ? 'Add Email' : 'Update Email'}
           </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={handleClearLogs}
+          style={styles.clearLogsBtn}
+        >
+          <Text style={styles.clearLogsText}>Clear Logs</Text>
         </TouchableOpacity>
       </View>
 

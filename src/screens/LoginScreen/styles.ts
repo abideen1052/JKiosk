@@ -71,6 +71,25 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.textHeader,
   },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.footerBorder,
+    borderRadius: 12,
+  },
+  passwordInput: {
+    flex: 1,
+    paddingHorizontal: 15,
+    paddingVertical: 12,
+    fontSize: 16,
+    color: colors.textHeader,
+  },
+  eyeIcon: {
+    padding: 10,
+    marginRight: 5,
+  },
   errorText: {
     color: colors.primary,
     fontSize: 14,

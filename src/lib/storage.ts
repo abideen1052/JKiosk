@@ -45,6 +45,16 @@ export const getLogs = async (filters: any = {}) => {
   }
 };
 
+export const clearAllLogs = async () => {
+  try {
+    await AsyncStorage.removeItem(KEYS.DELIVERY_LOGS);
+    return true;
+  } catch (error) {
+    console.error('Error in clearAllLogs:', error);
+    return false;
+  }
+};
+
 export const saveLog = async (mobile: string, name: string, company: string, orderNumber: string) => {
   try {
     const data = await AsyncStorage.getItem(KEYS.DELIVERY_LOGS);

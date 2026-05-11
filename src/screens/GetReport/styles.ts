@@ -167,4 +167,16 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
   },
+  clearLogsBtn: {
+    backgroundColor: '#FFE5E5',
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 8,
+    marginLeft: 'auto',
+  },
+  clearLogsText: {
+    color: '#D32F2F',
+    fontWeight: '600',
+    fontSize: 13,
+  },
 });
